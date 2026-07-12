@@ -1,24 +1,37 @@
-"""
-Fleet AI Assistant.
-"""
+from fastapi import APIRouter, HTTPException
 
-from chat_assistant.backend.app.services.sql_generator import SQLGenerator
-from chat_assistant.backend.app.services.sql_validator import SQLValidator
+from chat_assistant.backend.app.schemas.assistant import (
+    ChatRequest,
+    ChatResponse,
+)
+
+from chat_assistant.backend.app.services.assistant import (
+    FleetAssistant,
+)
+
+router = APIRouter()
+
+assistant = FleetAssistant()
 
 
-class FleetAssistant:
+@router.post(
+    "/chat",
+    response_model=ChatResponse,
+)
+def chat(request: ChatRequest):
 
-    def __init__(self):
+    try:
 
-        self.generator = SQLGenerator()
+        answer = assistant.chat(request.question)
 
-    def generate_sql(
-        self,
-        question: str,
-    ) -> str:
+        return ChatResponse(
+            success=True,
+            answer=answer,
+        )
 
-        sql = self.generator.generate(question)
+    except Exception as e:
 
-        sql = SQLValidator.validate(sql)
-
-        return sql
+        raise HTTPException(
+            status_code=500,
+            detail=str(e),
+        )
