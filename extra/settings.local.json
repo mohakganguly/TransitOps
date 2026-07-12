@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version; npm --version; try { \\(Get-Command mongod -ErrorAction Stop\\).Source } catch { \"mongod: not installed\" }; try { Get-Service MongoDB -ErrorAction Stop | Select-Object Status } catch { \"MongoDB service: none\" })",
+      "mcp__visualize__show_widget"
+    ]
+  }
+}
