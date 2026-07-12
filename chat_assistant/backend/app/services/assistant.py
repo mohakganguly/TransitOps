@@ -11,21 +11,6 @@ from chat_assistant.backend.app.services.answer_generator import AnswerGenerator
 
 
 class FleetAssistant:
-    """
-    Main AI Assistant Service.
-
-    Pipeline:
-
-    User Question
-            ↓
-    SQL Generation
-            ↓
-    SQL Validation
-            ↓
-    SQL Execution
-            ↓
-    Natural Language Answer
-    """
 
     def __init__(self):
 
@@ -33,24 +18,21 @@ class FleetAssistant:
         self.sql_executor = SQLExecutor()
         self.answer_generator = AnswerGenerator()
 
-    def chat(self, question: str) -> str:
-        """
-        Main entry point for the assistant.
-        """
+    def chat(self, question: str):
 
-        # Step 1 : Generate SQL
+        # Generate SQL
         sql = self.sql_generator.generate(question)
 
-        # Step 2 : Validate SQL
+        # Validate SQL
         SQLValidator.validate(sql)
 
-        # Step 3 : Execute SQL
+        # Execute SQL
         results = self.sql_executor.execute(sql)
 
-        # Step 4 : Generate Final Answer
+        # Convert to English
         answer = self.answer_generator.generate(
-            question=question,
-            results=results,
+            question,
+            results,
         )
 
         return answer

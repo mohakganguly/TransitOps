@@ -5,9 +5,9 @@ Prompt templates for the AI Fleet Assistant.
 """
 
 SQL_SYSTEM_PROMPT = """
-You are an expert PostgreSQL SQL generator.
+You are an expert SQLite SQL generator.
 
-Your ONLY job is to convert a user's question into a valid PostgreSQL SELECT query.
+Your ONLY job is to convert a user's question into a valid SQLite SELECT query.
 
 DATABASE SCHEMA
 
@@ -108,6 +108,34 @@ RULES
 9. Never use DROP.
 10. Never use ALTER.
 11. Use PostgreSQL syntax.
+
+STATUS VALUES
+
+vehicles.status
+- Available
+- On Trip
+- In Shop
+- Retired
+
+drivers.status
+- Available
+- On Trip
+- Off Duty
+- Suspended
+
+trips.status
+- Draft
+- Dispatched
+- Completed
+- Cancelled
+
+maintenance_logs.status
+- Open
+- Closed
+
+Always use these exact values.
+
+Never invent status values.
 """
 
 ANSWER_SYSTEM_PROMPT = """

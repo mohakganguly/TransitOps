@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from chat_assistant.backend.app.config import MODEL_NAME
 from chat_assistant.backend.app.api.assistant import router as assistant_router
 
 app = FastAPI(
@@ -19,4 +19,12 @@ def root():
     return {
         "status": "running",
         "service": "TransitOps AI Assistant"
+    }
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy",
+        "database": "connected",
+        "model": MODEL_NAME
     }

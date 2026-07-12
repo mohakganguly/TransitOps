@@ -1,16 +1,29 @@
 """
-Execute SQL.
+sql_executor.py
 
-Will be implemented once PostgreSQL is ready.
+Executes validated SQL queries on the TransitOps SQLite database.
 """
 
-    
+from chat_assistant.backend.app.database.connection import get_connection
+
+
 class SQLExecutor:
 
     def execute(self, sql: str):
+        """
+        Execute a validated SQL query and return results.
+        """
 
-        return f"""
-Generated SQL
+        conn = get_connection()
 
-{sql}
-"""
+        try:
+            cursor = conn.cursor()
+
+            cursor.execute(sql)
+
+            rows = cursor.fetchall()
+
+            return [dict(row) for row in rows]
+
+        finally:
+            conn.close()

@@ -1,5 +1,7 @@
 """
-Validate SQL.
+sql_validator.py
+
+Ensures that only safe SELECT queries are executed.
 """
 
 
@@ -13,31 +15,27 @@ class SQLValidator:
         "ALTER",
         "TRUNCATE",
         "CREATE",
-        "GRANT",
-        "REVOKE",
+        "REPLACE",
+        "PRAGMA",
+        "ATTACH",
+        "DETACH",
     ]
 
-    @classmethod
-    def validate(
-        cls,
-        sql: str,
-    ) -> str:
+    @staticmethod
+    def validate(sql: str):
 
-        sql = sql.strip()
+        query = sql.strip().upper()
 
-        if not sql.upper().startswith("SELECT"):
-            raise ValueError(
-                "Only SELECT statements are allowed."
-            )
+        if not query.startswith("SELECT"):
+            raise ValueError("Only SELECT queries are allowed.")
 
-        upper = sql.upper()
+        for keyword in SQLValidator.FORBIDDEN:
 
-        for keyword in cls.FORBIDDEN:
+            if keyword in query:
+                raise ValueError(f"Forbidden SQL keyword: {keyword}")
 
-            if keyword in upper:
+        # Prevent multiple SQL statements
+        if ";" in query[:-1]:
+            raise ValueError("Multiple SQL statements are not allowed.")
 
-                raise ValueError(
-                    f"Forbidden keyword: {keyword}"
-                )
-
-        return sql
+        return True
