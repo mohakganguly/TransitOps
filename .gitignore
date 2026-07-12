@@ -48,3 +48,9 @@ frontend/dist/
 backend/dist/
 
 .env
+
+# ==========================
+# SQLite Temporary Files
+# ==========================
+*.db-shm
+*.db-wal
