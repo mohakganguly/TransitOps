@@ -4,6 +4,8 @@ sql_validator.py
 Ensures that only safe SELECT queries are executed.
 """
 
+import re
+
 
 class SQLValidator:
 
@@ -19,6 +21,8 @@ class SQLValidator:
         "PRAGMA",
         "ATTACH",
         "DETACH",
+        "GRANT",
+        "REVOKE",
     ]
 
     @staticmethod
@@ -31,7 +35,7 @@ class SQLValidator:
 
         for keyword in SQLValidator.FORBIDDEN:
 
-            if keyword in query:
+            if re.search(r'\b' + re.escape(keyword) + r'\b', query):
                 raise ValueError(f"Forbidden SQL keyword: {keyword}")
 
         # Prevent multiple SQL statements

@@ -4,6 +4,7 @@ sql_executor.py
 Executes validated SQL queries on the TransitOps SQLite database.
 """
 
+import json
 from chat_assistant.backend.app.database.connection import get_connection
 
 
@@ -13,17 +14,17 @@ class SQLExecutor:
         """
         Execute a validated SQL query and return results.
         """
-
-        conn = get_connection()
-
         try:
+            conn = get_connection()
             cursor = conn.cursor()
-
             cursor.execute(sql)
-
             rows = cursor.fetchall()
-
-            return [dict(row) for row in rows]
-
-        finally:
             conn.close()
+
+            if not rows:
+                return "No records found matching the query."
+
+            results = [dict(row) for row in rows]
+            return json.dumps(results, indent=2)
+        except Exception as e:
+            return f"Database query failed: {str(e)}"

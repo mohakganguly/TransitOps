@@ -38,4 +38,5 @@ Do not mention SQL.
         return self.llm.generate(
             system_prompt=ANSWER_SYSTEM_PROMPT,
             user_prompt=prompt,
+            temperature=0.3
         )

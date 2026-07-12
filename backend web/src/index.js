@@ -14,6 +14,7 @@ import fuelRoutes from './routes/fuel.js';
 import expenseRoutes from './routes/expenses.js';
 import dashboardRoutes from './routes/dashboard.js';
 import reportRoutes from './routes/reports.js';
+import assistantRoutes from './routes/assistant.js';
 
 seedIfEmpty();
 
@@ -32,6 +33,7 @@ app.use('/api/fuel', requireAuth, fuelRoutes);
 app.use('/api/expenses', requireAuth, expenseRoutes);
 app.use('/api/dashboard', requireAuth, dashboardRoutes);
 app.use('/api/reports', requireAuth, reportRoutes);
+app.use('/api/assistant', requireAuth, assistantRoutes);
 
 app.use((req, res) => res.status(404).json({ error: 'Not found' }));
 app.use((err, req, res, next) => {

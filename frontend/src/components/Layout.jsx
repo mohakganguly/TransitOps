@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth, ROLE_LABELS, ROLE_PAGES } from '../AuthContext';
+import ChatBot from './ChatBot';
 
 const NAV = [
   { to: '/', label: 'Dashboard', icon: '📊' },
   { to: '/vehicles', label: 'Fleet', icon: '🚚' },
+  { to: '/tracking', label: 'Live Tracking', icon: '📍' },
   { to: '/drivers', label: 'Drivers', icon: '🪪' },
   { to: '/compliance', label: 'Compliance', icon: '🛡️' },
   { to: '/trips', label: 'Trips', icon: '🗺️' },
@@ -101,6 +103,7 @@ export default function Layout() {
         <main className="flex-1 p-4 md:p-8">
           <Outlet />
         </main>
+        <ChatBot />
       </div>
     </div>
   );

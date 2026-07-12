@@ -107,7 +107,7 @@ RULES
 8. Never use DELETE.
 9. Never use DROP.
 10. Never use ALTER.
-11. Use PostgreSQL syntax.
+11. Use SQLite syntax.
 
 STATUS VALUES
 

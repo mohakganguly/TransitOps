@@ -3,10 +3,13 @@ import sqlite3
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
-DB_PATH = PROJECT_ROOT / "backend" / "transitops.db"
+DB_PATH = PROJECT_ROOT / "backend web" / "transitops.db"
+if not DB_PATH.exists():
+    DB_PATH = PROJECT_ROOT / "backend" / "transitops.db"
 
 print("Database Path:", DB_PATH)
 print("Database Exists:", DB_PATH.exists())
+
 
 
 def get_connection():

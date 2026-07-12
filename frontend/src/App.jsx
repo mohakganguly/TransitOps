@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, ROLE_PAGES, roleHome } from './AuthContext';
 import Layout from './components/Layout';
 import Login from './pages/Login';
+import FleetTrackingMap from './components/FleetTrackingMap';
 import Dashboard from './pages/Dashboard';
 import Vehicles from './pages/Vehicles';
 import Drivers from './pages/Drivers';
@@ -39,6 +40,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Guarded path="/"><Dashboard /></Guarded>} />
         <Route path="/vehicles" element={<Guarded path="/vehicles"><Vehicles /></Guarded>} />
+        <Route path="/tracking" element={<Guarded path="/tracking"><FleetTrackingMap /></Guarded>} />
         <Route path="/drivers" element={<Guarded path="/drivers"><Drivers /></Guarded>} />
         <Route path="/compliance" element={<Guarded path="/compliance"><Compliance /></Guarded>} />
         <Route path="/trips" element={<Guarded path="/trips"><Trips /></Guarded>} />

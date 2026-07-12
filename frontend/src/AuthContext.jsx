@@ -12,8 +12,8 @@ export const ROLE_LABELS = {
 
 // Access is scoped by role after login
 export const ROLE_PAGES = {
-  fleet_manager: ['/vehicles', '/maintenance'],
-  dispatcher: ['/', '/trips'],
+  fleet_manager: ['/vehicles', '/maintenance', '/tracking'],
+  dispatcher: ['/', '/trips', '/tracking'],
   safety_officer: ['/drivers', '/compliance'],
   financial_analyst: ['/fuel-expenses', '/reports'],
 };
